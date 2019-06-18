@@ -1,0 +1,23 @@
+.tab-menu {
+  background: $blue;
+}
+
+.tab-menu__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.tab-menu__item {
+  @extend %text--24;
+
+  padding: rem(24);
+  border-bottom: 5px solid transparent;
+  text-align: center;
+  color: $darkBlue;
+  cursor: pointer;
+
+  &.is-active {
+    border-bottom-color: $darkBlue;
+    color: $white;
+  }
+}
