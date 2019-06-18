@@ -1,0 +1,14 @@
+.add-task {
+  @extend %text--24;
+
+  margin: rem(24) 0;
+  padding: rem(20) rem(30);
+  border: 2px solid $gray;
+  border-radius: 5px;
+  background-color: $white;
+  color: $gray;
+
+  &:hover {
+    color: $gray-dark;
+  }
+}
