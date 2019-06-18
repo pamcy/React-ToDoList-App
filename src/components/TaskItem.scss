@@ -1,0 +1,40 @@
+.task-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  grid-column-gap: rem(20);
+  padding: rem(24);
+  border-radius: 5px;
+  background-color: $gray-lighter;
+}
+
+.task-item__title {
+  @extend %heading--24;
+}
+
+// icons
+
+
+.task-item__checkbox,
+.task-item__priority,
+.task-item__edit {
+  position: relative;
+  width: rem(28);
+  font-size: rem(24);
+
+  i {
+    position: absolute;
+  }
+}
+
+.task-item__icon-uncheck {
+  color: $white;
+}
+
+.task-item__icon-checked {
+  color: $blue;
+}
+
+.task-item__icon-colored-star {
+  background-color: $gray-lighter;
+  color: $orange;
+}
