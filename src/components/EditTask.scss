@@ -1,0 +1,90 @@
+.edit-task {
+  border-top: 2px solid $gray;
+  border-radius: 0 0 5px 5px;
+  background-color: $gray-lighter;
+}
+
+.edit-task__content {
+  padding: rem(24) rem(50);
+}
+
+.edit-task__label {
+  @extend %heading--20;
+
+  display: block;
+  margin-bottom: rem(8);
+
+  &::before {
+    display: inline-block;
+    width: rem(20);
+    margin-right: rem(5);
+    font-family: "Font Awesome 5 Free";
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  &[for=deadline]::before {
+    content: "\f073";
+  }
+
+  &[for=file]::before {
+    content: "\f15b";
+  }
+
+  &[for=comment]::before {
+    content: "\f4ad";
+  }
+}
+
+.edit-task__field {
+  &:not(:last-of-type) {
+    margin-bottom: rem(20);
+  }
+
+  input[name="date"],
+  input[name="time"],
+  textarea[name="comment"] {
+    background-color: $white;
+  }
+
+  input[name="date"] {
+    margin-right: rem(10);
+  }
+
+  textarea[name="comment"] {
+    width: 90%;
+  }
+
+  .edit-task__input-wrapper,
+  input[name="file"],
+  textarea[name="comment"] {
+    margin-left: rem(25);
+  }
+}
+
+.edit-task__btns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.edit-task__btn {
+  @extend %text--24;
+
+  padding: rem(18);
+  text-align: center;
+  text-decoration: none;
+}
+
+.edit-task__btn--cancel {
+  border-bottom-left-radius: 5px;
+  background-color: $white;
+  color: $red;
+}
+
+.edit-task__btn--add {
+  border-bottom-right-radius: 5px;
+  background-color: $blue;
+  color: $white;
+}
