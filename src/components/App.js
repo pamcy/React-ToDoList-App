@@ -1,38 +1,33 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import TabMenuList from './TabMenuList';
 import TabContent from './TabContent';
-import logo from '../logo.svg';
 
 class App extends React.Component {
   render() {
+    const routes = [
+      {
+        path: '/',
+        exact: true,
+        component: TabContent,
+      },
+      {
+        path: '/progress',
+        component: TabContent,
+      },
+    ];
+
     return (
-      <div className="container">
-        <TabMenuList />
-        <TabContent />
-      </div>
+      <Router>
+        <div className="container">
+          <TabMenuList />
+          {routes.map((route, index) => (
+            <Route key={index} path={route.path} exact={route.exact} component={route.component} />
+          ))}
+        </div>
+      </Router>
     );
   }
 }
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           hi Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
 
 export default App;

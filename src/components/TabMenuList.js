@@ -1,17 +1,20 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
-class TabMenuList extends React.Component {
-  render() {
-    return (
-      <div className="tab-menu">
-        <ul className="tab-menu__list wrapper-s">
-          <li className="tab-menu__item is-active">My Tasks</li>
-          <li className="tab-menu__item">In Progress</li>
-          <li className="tab-menu__item">Completed</li>
-        </ul>
-      </div>
-    );
-  }
-}
+const TabMenuList = () => (
+  <div className="tab-menu">
+    <ul className="tab-menu__list wrapper-s">
+      <li className="tab-menu__item is-active">
+        <Link to="./">My Tasks</Link>
+      </li>
+      <li className="tab-menu__item">
+        <Link to="/progress">In Progress</Link>
+      </li>
+      <li className="tab-menu__item">
+        <Link to="/complete">Completed</Link>
+      </li>
+    </ul>
+  </div>
+);
 
 export default TabMenuList;
