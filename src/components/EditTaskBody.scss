@@ -1,14 +1,14 @@
-.edit-task {
+.edit-body {
   border-radius: 0 0 5px 5px;
   background-color: $gray-lighter;
 }
 
-.edit-task__content {
+.edit-body__content {
   padding: rem(24) rem(50);
   border-top: 2px solid $gray;
 }
 
-.edit-task__label {
+.edit-body__label {
   @extend %heading--20;
 
   display: block;
@@ -38,7 +38,7 @@
   }
 }
 
-.edit-task__field {
+.edit-body__field {
   &:not(:last-of-type) {
     margin-bottom: rem(20);
   }
@@ -57,32 +57,32 @@
     width: 90%;
   }
 
-  .edit-task__input-wrapper,
+  .edit-body__input-wrapper,
   input[name="file"],
   textarea[name="comment"] {
     margin-left: rem(25);
   }
 }
 
-.edit-task__btns {
+.edit-body__btns {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
 
-.edit-task__btn {
+.edit-body__btn {
   @extend %text--24;
 
   padding: rem(18);
   text-align: center;
 }
 
-.edit-task__btn--cancel {
+.edit-body__btn--cancel {
   border-bottom-left-radius: 5px;
   background-color: $white;
   color: $red;
 }
 
-.edit-task__btn--add {
+.edit-body__btn--add {
   border-bottom-right-radius: 5px;
   background-color: $blue;
   color: $white;

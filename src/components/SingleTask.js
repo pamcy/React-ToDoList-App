@@ -1,51 +1,75 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SingleItemInfo from './SingleItemInfo';
+import EditTaskHead from './EditTaskHead';
+import EditTaskBody from './EditTaskBody';
 
 class SingleTask extends React.Component {
   static propTypes = {
-    getTaskTitle: PropTypes.func,
+    addTask: PropTypes.func,
   };
 
-  markComplete;
+  state = {
+    title: null,
+    date: null,
+    time: null,
+    file: null,
+    comment: null,
+    completed: false,
+    important: false,
+    editIsOpen: true,
+  };
+
+  onInputChange = e => {
+    this.setState({
+      [e.currentTarget.name]: e.currentTarget.value,
+    });
+  };
+
+  getTaskCompleted = () => {
+    const { completed } = this.state;
+    this.setState({ completed: !completed });
+  };
+
+  getTaskImportant = () => {
+    const { important } = this.state;
+    this.setState({ important: !important });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+
+    const { title, date, time, file, comment } = this.state;
+    const { addTask } = this.props;
+
+    const task = {
+      title,
+      date,
+      time,
+      file,
+      comment,
+    };
+
+    addTask(task);
+    e.currentTarget.reset();
+  };
 
   render() {
-    const { details, getTaskTitle, getTaskCompleted, getTaskImportant } = this.props;
-    const toggleComplete = details.completed ? 'is-checked' : '';
-    const toggleImportant = details.important ? 'is-important' : '';
-
     return (
       <div className="single-task">
-        <div
-          className={`single-task__checkbox ${toggleComplete}`}
-          onClick={() => getTaskCompleted()}
-        >
-          <i className="fas fa-square single-task__icon-uncheck" />
-          <i className="fas fa-check-square single-task__icon-checked" />
-        </div>
-        <div className="single-task__content">
-          <input
-            className="single-task__input-title"
-            type="text"
-            name="title"
-            onChange={e => getTaskTitle(e.currentTarget.value)}
-            placeholder="Add a task"
+        <form className="single-task__edit" onSubmit={this.handleSubmit}>
+          <EditTaskHead
+            details={this.state}
+            onChange={this.onInputChange}
+            getTaskCompleted={this.getTaskCompleted}
+            getTaskImportant={this.getTaskImportant}
           />
-          {/* <SingleItemInfo /> */}
-        </div>
-        <div
-          className={`single-task__priority ${toggleImportant}`}
-          onClick={() => getTaskImportant()}
-        >
-          <i className="far fa-star single-task__icon-white-star" />
-          <i className="fas fa-star single-task__icon-colored-star" />
-        </div>
-        <div className="single-task__edit">
-          <i className="fas fa-pen single-task__icon-edit" />
-        </div>
+          <EditTaskBody onChange={this.onInputChange} />
+        </form>
       </div>
     );
   }
 }
 
 export default SingleTask;
+
+// https://stackoverflow.com/questions/35815631/react-get-child-component-data-from-parent

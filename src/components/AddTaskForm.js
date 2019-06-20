@@ -1,33 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import EditTaskForm from './EditTaskForm';
+import SingleTask from './SingleTask';
 
 class AddTaskForm extends React.Component {
   static propTypes = {
     addTask: PropTypes.func,
   };
 
-  state = {
-    editIsOpen: false,
-  };
-
-  displayEditBody = () => {
-    this.setState({ editIsOpen: true });
-  };
-
   render() {
-    const { editIsOpen } = this.state;
+    const { displayEditBody, details } = this.props;
+    const { isOpen } = details;
 
-    if (editIsOpen) {
-      return (
-        <div className="edit-item">
-          <EditTaskForm addTask={this.props.addTask} />
-        </div>
-      );
+    if (isOpen) {
+      return <SingleTask addTask={this.props.addTask} />;
     }
 
     return (
-      <div className="add-task" onClick={this.displayEditBody}>
+      <div className="add-task" onClick={() => displayEditBody()}>
         ＋ Add a task
       </div>
     );
