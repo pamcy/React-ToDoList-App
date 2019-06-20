@@ -1,11 +1,11 @@
 .edit-task {
-  border-top: 2px solid $gray;
   border-radius: 0 0 5px 5px;
   background-color: $gray-lighter;
 }
 
 .edit-task__content {
   padding: rem(24) rem(50);
+  border-top: 2px solid $gray;
 }
 
 .edit-task__label {
@@ -74,7 +74,6 @@
 
   padding: rem(18);
   text-align: center;
-  text-decoration: none;
 }
 
 .edit-task__btn--cancel {
