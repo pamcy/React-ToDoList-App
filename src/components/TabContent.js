@@ -5,12 +5,18 @@ import EditTaskForm from './EditTaskBody';
 class TabContent extends React.Component {
   state = {
     tasks: [],
-    isOpen: false,
+    editIsOpen: false,
   };
 
-  displayEditBody = () => {
+  openEditBody = () => {
     this.setState({
-      isOpen: true,
+      editIsOpen: true,
+    });
+  };
+
+  closeEditBody = () => {
+    this.setState({
+      editIsOpen: false,
     });
   };
 
@@ -25,8 +31,9 @@ class TabContent extends React.Component {
       <div className="tab-content wrapper-s">
         <AddTaskForm
           addTask={this.addTask}
-          displayEditBody={this.displayEditBody}
-          details={this.state}
+          openEditBody={this.openEditBody}
+          closeEditBody={this.closeEditBody}
+          editIsOpen={this.state.editIsOpen}
         />
         {/* {editing && (
           <AddTaskForm

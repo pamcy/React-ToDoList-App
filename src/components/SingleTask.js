@@ -6,6 +6,7 @@ import EditTaskBody from './EditTaskBody';
 class SingleTask extends React.Component {
   static propTypes = {
     addTask: PropTypes.func,
+    closeEditBody: PropTypes.func,
   };
 
   state = {
@@ -16,10 +17,9 @@ class SingleTask extends React.Component {
     comment: null,
     completed: false,
     important: false,
-    editIsOpen: true,
   };
 
-  onInputChange = e => {
+  handleInputChange = e => {
     this.setState({
       [e.currentTarget.name]: e.currentTarget.value,
     });
@@ -39,7 +39,7 @@ class SingleTask extends React.Component {
     e.preventDefault();
 
     const { title, date, time, file, comment } = this.state;
-    const { addTask } = this.props;
+    const { addTask, closeEditBody } = this.props;
 
     const task = {
       title,
@@ -49,8 +49,12 @@ class SingleTask extends React.Component {
       comment,
     };
 
-    addTask(task);
+    if (title) {
+      addTask(task);
+    }
+
     e.currentTarget.reset();
+    closeEditBody();
   };
 
   render() {
@@ -59,11 +63,11 @@ class SingleTask extends React.Component {
         <form className="single-task__edit" onSubmit={this.handleSubmit}>
           <EditTaskHead
             details={this.state}
-            onChange={this.onInputChange}
+            onChange={this.handleInputChange}
             getTaskCompleted={this.getTaskCompleted}
             getTaskImportant={this.getTaskImportant}
           />
-          <EditTaskBody onChange={this.onInputChange} />
+          <EditTaskBody onChange={this.handleInputChange} />
         </form>
       </div>
     );
