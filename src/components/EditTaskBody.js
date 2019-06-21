@@ -31,7 +31,11 @@ class EditTaskBody extends React.Component {
             />
           </div>
           <div className="edit-body__btns">
-            <button type="button" className="edit-body__btn edit-body__btn--cancel">
+            <button
+              type="button"
+              className="edit-body__btn edit-body__btn--cancel"
+              onClick={() => this.props.handleCancel()}
+            >
               &#10005; Cancel
             </button>
             <button type="submit" className="edit-body__btn edit-body__btn--add">

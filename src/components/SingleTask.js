@@ -9,6 +9,8 @@ class SingleTask extends React.Component {
     closeEditBody: PropTypes.func,
   };
 
+  formRef = React.createRef();
+
   state = {
     title: null,
     date: null,
@@ -57,17 +59,24 @@ class SingleTask extends React.Component {
     closeEditBody();
   };
 
+  handleCancel = () => {
+    const closeEditBody = this.props;
+
+    this.formRef.current.reset();
+    closeEditBody();
+  };
+
   render() {
     return (
       <div className="single-task">
-        <form className="single-task__edit" onSubmit={this.handleSubmit}>
+        <form className="single-task__edit" ref={this.formRef} onSubmit={this.handleSubmit}>
           <EditTaskHead
             details={this.state}
             onChange={this.handleInputChange}
             getTaskCompleted={this.getTaskCompleted}
             getTaskImportant={this.getTaskImportant}
           />
-          <EditTaskBody onChange={this.handleInputChange} />
+          <EditTaskBody onChange={this.handleInputChange} handleCancel={this.handleCancel} />
         </form>
       </div>
     );
