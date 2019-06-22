@@ -7,6 +7,7 @@ class SingleTask extends React.Component {
   static propTypes = {
     addTask: PropTypes.func,
     closeEditBody: PropTypes.func,
+    editIsOpen: PropTypes.bool,
   };
 
   formRef = React.createRef();
@@ -67,10 +68,13 @@ class SingleTask extends React.Component {
   };
 
   render() {
+    const { editIsOpen } = this.props;
+
     return (
       <div className="single-task">
         <form className="single-task__edit" ref={this.formRef} onSubmit={this.handleSubmit}>
           <EditTaskHead
+            editIsOpen={editIsOpen}
             details={this.state}
             onChange={this.handleInputChange}
             getTaskCompleted={this.getTaskCompleted}

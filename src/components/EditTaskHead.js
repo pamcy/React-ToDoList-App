@@ -13,9 +13,10 @@ class EditTaskHead extends React.Component {
   };
 
   render() {
-    const { details, getTaskCompleted, getTaskImportant } = this.props;
+    const { editIsOpen, details, getTaskCompleted, getTaskImportant } = this.props;
     const toggleComplete = details.completed ? 'is-checked' : '';
     const toggleImportant = details.important ? 'is-important' : '';
+    const toggleEditing = editIsOpen ? 'is-editing' : '';
 
     return (
       <div className="edit-head">
@@ -40,7 +41,7 @@ class EditTaskHead extends React.Component {
           <i className="far fa-star edit-head__icon-white-star" />
           <i className="fas fa-star edit-head__icon-colored-star" />
         </div>
-        <div className="edit-head__edit">
+        <div className={`edit-head__edit ${toggleEditing}`}>
           <i className="fas fa-pen edit-head__icon-edit" />
         </div>
       </div>
