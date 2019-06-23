@@ -7,11 +7,23 @@ class AddTaskForm extends React.Component {
     addTask: PropTypes.func,
   };
 
+  state = {
+    isNewTask: true,
+  };
+
   render() {
     const { editIsOpen, openEditBody, closeEditBody, addTask } = this.props;
+    const isNewTask = this.state;
 
     if (editIsOpen) {
-      return <SingleTask addTask={addTask} closeEditBody={closeEditBody} />;
+      return (
+        <SingleTask
+          addTask={addTask}
+          openEditBody={openEditBody}
+          closeEditBody={closeEditBody}
+          isNewTask={isNewTask}
+        />
+      );
     }
 
     return (

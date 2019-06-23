@@ -61,16 +61,22 @@ class SingleTask extends React.Component {
   };
 
   render() {
-    const { editIsOpen, data } = this.props;
+    const { isNewTask, editIsOpen, data } = this.props;
 
     return (
       <li className="single-task">
         <form className="single-task__edit" ref={this.formRef} onSubmit={this.handleSubmit}>
-          <EditTaskHead editIsOpen={editIsOpen} onChange={this.handleInputChange} data={data} />
+          <EditTaskHead
+            data={data}
+            onChange={this.handleInputChange}
+            isNewTask={isNewTask}
+            editIsOpen={editIsOpen}
+          />
           <EditTaskBody
             data={data}
             onChange={this.handleInputChange}
             handleCancel={this.handleCancel}
+            isNewTask={isNewTask}
           />
         </form>
       </li>
@@ -79,5 +85,3 @@ class SingleTask extends React.Component {
 }
 
 export default SingleTask;
-
-// https://stackoverflow.com/questions/35815631/react-get-child-component-data-from-parent

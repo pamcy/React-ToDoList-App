@@ -27,15 +27,16 @@ class TabContent extends React.Component {
   };
 
   render() {
-    const { tasks } = this.state;
+    const { tasks, editIsOpen, isNewTask } = this.state;
     return (
       <div className="tab-content wrapper-s">
         <AddTaskForm
           addTask={this.addTask}
           openEditBody={this.openEditBody}
           closeEditBody={this.closeEditBody}
-          editIsOpen={this.state.editIsOpen}
+          editIsOpen={editIsOpen}
         />
+
         {/* {editing && (
           <AddTaskForm
             addTask={this.addTask}
@@ -44,9 +45,9 @@ class TabContent extends React.Component {
           />
         )} */}
         <ul className="tasks-wrapper">
-          {/* {tasks.map(task => (
+          {tasks.map(task => (
             <SingleTask key={task.id} data={task} />
-          ))} */}
+          ))}
         </ul>
       </div>
     );
