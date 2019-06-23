@@ -1,6 +1,6 @@
 import React from 'react';
 import AddTaskForm from './AddTaskForm';
-import EditTaskForm from './EditTaskBody';
+import SingleTask from './SingleTask';
 
 class TabContent extends React.Component {
   state = {
@@ -27,6 +27,7 @@ class TabContent extends React.Component {
   };
 
   render() {
+    const { tasks } = this.state;
     return (
       <div className="tab-content wrapper-s">
         <AddTaskForm
@@ -43,7 +44,9 @@ class TabContent extends React.Component {
           />
         )} */}
         <ul className="tasks-wrapper">
-          <li className="task-list" />
+          {/* {tasks.map(task => (
+            <SingleTask key={task.id} data={task} />
+          ))} */}
         </ul>
       </div>
     );

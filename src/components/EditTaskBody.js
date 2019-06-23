@@ -7,25 +7,27 @@ class EditTaskBody extends React.Component {
   };
 
   render() {
+    const { onChange } = this.props;
+
     return (
       <div className="edit-body">
         <div className="edit-body__content">
           <div className="edit-body__field">
             <label className="edit-body__label">Deadline</label>
             <div className="edit-body__input-wrapper">
-              <input type="date" name="date" onChange={this.props.onChange} />
-              <input type="time" name="time" onChange={this.props.onChange} />
+              <input type="date" name="date" onChange={onChange} />
+              <input type="time" name="time" onChange={onChange} />
             </div>
           </div>
           <div className="edit-body__field">
             <label className="edit-body__label">File</label>
-            <input type="file" name="file" onChange={this.props.onChange} />
+            <input type="file" name="file" onChange={onChange} />
           </div>
           <div className="edit-body__field">
             <label className="edit-body__label">Comment</label>
             <textarea
               name="comment"
-              onChange={this.props.onChange}
+              onChange={onChange}
               rows="8"
               placeholder="Type your memo here..."
             />

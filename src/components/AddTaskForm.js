@@ -8,16 +8,10 @@ class AddTaskForm extends React.Component {
   };
 
   render() {
-    const { openEditBody, closeEditBody, editIsOpen } = this.props;
+    const { editIsOpen, openEditBody, closeEditBody, addTask } = this.props;
 
     if (editIsOpen) {
-      return (
-        <SingleTask
-          addTask={this.props.addTask}
-          editIsOpen={editIsOpen}
-          closeEditBody={closeEditBody}
-        />
-      );
+      return <SingleTask addTask={addTask} closeEditBody={closeEditBody} />;
     }
 
     return (

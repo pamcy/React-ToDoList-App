@@ -2,7 +2,8 @@
   display: grid;
   grid-template-columns: auto 1fr auto auto;
   grid-column-gap: rem(20);
-  padding: rem(24);
+  align-items: center;
+  padding: 0 rem(24);
   border-radius: 5px;
   background-color: $gray-lighter;
 }
@@ -10,68 +11,58 @@
 .edit-head__input-title {
   @extend %heading--24;
 
+  padding: 1.5rem 0;
   width: 100%;
 }
 
-// icons
 .edit-head__checkbox,
 .edit-head__priority,
 .edit-head__edit {
-  position: relative;
   width: rem(28);
-  font-size: rem(24);
+}
 
-  i {
-    position: absolute;
+input[type='checkbox'] {
+  display: none;
+
+  &+label::before {
+    font-size: rem(24);
+    display: inline-block;
+    font-family: 'Font Awesome 5 Free';
   }
 }
 
 .edit-head__checkbox {
-  margin-top: 3px;
-  cursor: pointer;
-}
-
-.edit-head__icon-uncheck {
-  background-color: $gray-lighter;
-  color: $white;
-  z-index: 2;
-
-  .is-checked & {
-    z-index: 1;
+  input+label::before {
+    content: '\f00c';
+    font-weight: 900;
+    color: $white;
+    background-color: $white;
   }
-}
 
-.edit-head__icon-checked {
-  color: $blue;
-  z-index: 1;
+  input:checked+label::before {
+    font-weight: 900;
+    color: $white;
+    background-color: $blue;
+  }
 
-  .is-checked & {
-    z-index: 2;
+  input:checked+label::after {
+    content: '';
   }
 }
 
 .edit-head__priority {
-  cursor: pointer;
-}
-
-.edit-head__icon-white-star {
-  color: $black;
-  z-index: 2;
-
-  .is-important & {
-    color: transparent;
-    z-index: 1;
+  input+label::before {
+    content: '\f005';
+    color: $black;
   }
-}
 
-.edit-head__icon-colored-star {
-  background-color: $gray-lighter;
-  color: transparent;
-  z-index: 1;
-
-  .is-important & {
+  input:checked+label::before {
+    font-weight: 900;
     color: $orange;
-    z-index: 2;
+  }
+
+  input:checked+label::after {
+    content: '';
   }
 }
 
@@ -80,6 +71,7 @@
 }
 
 .edit-head__icon-edit {
+  font-size: rem(24);
   color: $black;
 
   .is-editing & {

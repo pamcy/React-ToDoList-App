@@ -24,32 +24,25 @@ class SingleTask extends React.Component {
 
   handleInputChange = e => {
     this.setState({
-      [e.currentTarget.name]: e.currentTarget.value,
+      [e.currentTarget.name]: e.currentTarget.checked || e.currentTarget.value,
     });
-  };
-
-  getTaskCompleted = () => {
-    const { completed } = this.state;
-    this.setState({ completed: !completed });
-  };
-
-  getTaskImportant = () => {
-    const { important } = this.state;
-    this.setState({ important: !important });
   };
 
   handleSubmit = e => {
     e.preventDefault();
 
-    const { title, date, time, file, comment } = this.state;
+    const { title, date, time, file, comment, completed, important } = this.state;
     const { addTask, closeEditBody } = this.props;
 
     const task = {
+      id: Date.now(),
       title,
       date,
       time,
       file,
       comment,
+      completed,
+      important,
     };
 
     if (title) {
@@ -61,28 +54,26 @@ class SingleTask extends React.Component {
   };
 
   handleCancel = () => {
-    const closeEditBody = this.props;
+    const { closeEditBody } = this.props;
 
     this.formRef.current.reset();
     closeEditBody();
   };
 
   render() {
-    const { editIsOpen } = this.props;
+    const { editIsOpen, data } = this.props;
 
     return (
-      <div className="single-task">
+      <li className="single-task">
         <form className="single-task__edit" ref={this.formRef} onSubmit={this.handleSubmit}>
-          <EditTaskHead
-            editIsOpen={editIsOpen}
-            details={this.state}
+          <EditTaskHead editIsOpen={editIsOpen} onChange={this.handleInputChange} data={data} />
+          <EditTaskBody
+            data={data}
             onChange={this.handleInputChange}
-            getTaskCompleted={this.getTaskCompleted}
-            getTaskImportant={this.getTaskImportant}
+            handleCancel={this.handleCancel}
           />
-          <EditTaskBody onChange={this.handleInputChange} handleCancel={this.handleCancel} />
         </form>
-      </div>
+      </li>
     );
   }
 }
