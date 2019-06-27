@@ -1,3 +1,9 @@
 .single-task {
   margin: rem(24) 0;
 }
+
+.single-task__edit {
+  &.new-task {
+    margin: 1.5rem 0;
+  }
+}

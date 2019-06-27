@@ -25,9 +25,11 @@ input[type='checkbox'] {
   display: none;
 
   &+label::before {
+    @extend %font-awesome;
+
     font-size: rem(24);
     display: inline-block;
-    font-family: 'Font Awesome 5 Free';
+    cursor: pointer;
   }
 }
 
@@ -64,10 +66,6 @@ input[type='checkbox'] {
   input:checked+label::after {
     content: '';
   }
-}
-
-.edit-head__edit {
-  cursor: pointer;
 }
 
 .edit-head__icon-edit {

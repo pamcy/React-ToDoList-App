@@ -3,52 +3,64 @@ import AddTaskForm from './AddTaskForm';
 import SingleTask from './SingleTask';
 
 class TabContent extends React.Component {
+  formRef = React.createRef();
+
   state = {
     tasks: [],
-    editIsOpen: false,
+    newTaskIsOpen: false,
+    isEditing: false,
   };
 
-  openEditBody = () => {
+  openNewTask = () => {
     this.setState({
-      editIsOpen: true,
-    });
-  };
-
-  closeEditBody = () => {
-    this.setState({
-      editIsOpen: false,
+      newTaskIsOpen: true,
+      isEditing: true,
     });
   };
 
   addTask = task => {
     const tasks = [...this.state.tasks, task];
 
-    this.setState({ tasks });
+    this.setState({
+      tasks,
+      newTaskIsOpen: false,
+      isEditing: false,
+    });
+  };
+
+  cancelTask = () => {
+    this.formRef.current.reset();
+    this.setState({
+      newTaskIsOpen: false,
+      isEditing: false,
+    });
   };
 
   render() {
-    const { tasks, editIsOpen, isNewTask } = this.state;
+    const { newTaskIsOpen, isEditing } = this.state;
+
     return (
       <div className="tab-content wrapper-s">
-        <AddTaskForm
-          addTask={this.addTask}
-          openEditBody={this.openEditBody}
-          closeEditBody={this.closeEditBody}
-          editIsOpen={editIsOpen}
-        />
-
-        {/* {editing && (
+        {newTaskIsOpen ? (
           <AddTaskForm
+            formRef={this.formRef}
+            isEditing={isEditing}
             addTask={this.addTask}
-            displayEditBody={this.displayEditBody}
-            details={this.state}
+            cancelTask={this.cancelTask}
           />
-        )} */}
-        <ul className="tasks-wrapper">
+        ) : (
+          <div className="add-task" onClick={this.openNewTask}>
+            ＋ Add a task
+          </div>
+        )}
+
+        {/* {console.log(this.props.match.path)} */}
+
+        {/* <ul className="tasks-wrapper">
           {tasks.map(task => (
             <SingleTask key={task.id} data={task} />
           ))}
-        </ul>
+        </ul> */}
       </div>
     );
   }

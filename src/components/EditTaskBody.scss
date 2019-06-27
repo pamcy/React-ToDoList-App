@@ -19,14 +19,11 @@
   margin-bottom: rem(8);
 
   &::before {
+    @extend %font-awesome;
+
     display: inline-block;
     width: rem(20);
     margin-right: rem(5);
-    font-family: "Font Awesome 5 Free";
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
   }
 
   &[for=deadline]::before {
@@ -55,10 +52,16 @@
 
   input[name="date"] {
     margin-right: rem(10);
+    padding: rem(5) rem(10);
+  }
+
+  input[name="time"] {
+    padding: rem(5) rem(10);
   }
 
   textarea[name="comment"] {
     width: 90%;
+    padding: rem(15);
   }
 
   .edit-body__input-wrapper,
