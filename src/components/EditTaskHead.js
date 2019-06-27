@@ -3,22 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class EditTaskHead extends React.Component {
-  static propTypes = {
-    details: PropTypes.shape({
-      completed: PropTypes.bool,
-      important: PropTypes.bool,
-    }),
-    getTaskCompleted: PropTypes.func,
-    getTaskImportant: PropTypes.func,
-  };
+  static propTypes = {};
 
   render() {
-    const { isNewTask, editIsOpen, onChange, data } = this.props;
-
-    const completedValue = isNewTask ? undefined : data.completed;
-    const titleValue = isNewTask ? undefined : data.title;
-    const importantValue = isNewTask ? undefined : data.important;
-    const editStatus = editIsOpen ? 'is-editing' : '';
+    const { handleInputChange, isEditing } = this.props;
+    const { title, completed, important } = this.props.data;
+    const toggleEditStatus = isEditing ? 'is-editing' : '';
 
     return (
       <div className="edit-head">
@@ -27,8 +17,8 @@ class EditTaskHead extends React.Component {
             type="checkbox"
             name="completed"
             id="completed"
-            onChange={onChange}
-            checked={completedValue}
+            checked={completed}
+            onChange={handleInputChange}
           />
           <label htmlFor="completed" />
         </div>
@@ -37,9 +27,10 @@ class EditTaskHead extends React.Component {
             className="edit-head__input-title"
             type="text"
             name="title"
-            value={titleValue}
-            onChange={onChange}
+            value={title}
             placeholder="Add a task"
+            onChange={handleInputChange}
+            autoFocus
           />
         </div>
         <div className="edit-head__priority">
@@ -47,12 +38,12 @@ class EditTaskHead extends React.Component {
             type="checkbox"
             name="important"
             id="important"
-            onChange={onChange}
-            checked={importantValue}
+            checked={important}
+            onChange={handleInputChange}
           />
           <label htmlFor="important" />
         </div>
-        <div className={`edit-head__edit ${editStatus}`}>
+        <div className={`edit-head__edit ${toggleEditStatus}`}>
           <i className="fas fa-pen edit-head__icon-edit" />
         </div>
       </div>

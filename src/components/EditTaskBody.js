@@ -2,48 +2,67 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class EditTaskBody extends React.Component {
-  static propTypes = {
-    addTask: PropTypes.func,
-  };
+  static propTypes = {};
 
   render() {
-    const { onChange } = this.props;
+    const { handleInputChange, cancelTask } = this.props;
+    const { date, time, file, comment } = this.props.data;
 
     return (
       <div className="edit-body">
         <div className="edit-body__content">
           <div className="edit-body__field">
-            <label className="edit-body__label">Deadline</label>
+            <label htmlFor="deadline" className="edit-body__label">
+              Deadline
+            </label>
             <div className="edit-body__input-wrapper">
-              <input type="date" name="date" onChange={onChange} />
-              <input type="time" name="time" onChange={onChange} />
+              <input
+                ref={this.dateRef}
+                type="date"
+                name="date"
+                value={date}
+                onChange={handleInputChange}
+              />
+              <input
+                ref={this.timeRef}
+                type="time"
+                name="time"
+                value={time}
+                onChange={handleInputChange}
+              />
             </div>
           </div>
           <div className="edit-body__field">
-            <label className="edit-body__label">File</label>
-            <input type="file" name="file" onChange={onChange} />
+            <label htmlFor="file" className="edit-body__label">
+              File
+            </label>
+            <input ref={this.fileRef} type="file" name="file" onChange={handleInputChange} />
           </div>
           <div className="edit-body__field">
-            <label className="edit-body__label">Comment</label>
+            <label htmlFor="comment" className="edit-body__label">
+              Comment
+            </label>
             <textarea
+              ref={this.commentRef}
               name="comment"
-              onChange={onChange}
               rows="8"
               placeholder="Type your memo here..."
+              value={comment}
+              onChange={handleInputChange}
             />
           </div>
-          <div className="edit-body__btns">
-            <button
-              type="button"
-              className="edit-body__btn edit-body__btn--cancel"
-              onClick={() => this.props.handleCancel()}
-            >
-              &#10005; Cancel
-            </button>
-            <button type="submit" className="edit-body__btn edit-body__btn--add">
-              ＋ Add Task
-            </button>
-          </div>
+        </div>
+        <div className="edit-body__btns">
+          <button
+            type="button"
+            className="edit-body__btn edit-body__btn--cancel"
+            onClick={() => cancelTask()}
+          >
+            &#10005; Cancel
+          </button>
+          <button type="submit" className="edit-body__btn edit-body__btn--add">
+            ＋ Add Task
+          </button>
         </div>
       </div>
     );

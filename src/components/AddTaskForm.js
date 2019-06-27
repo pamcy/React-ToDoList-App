@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TabContent from './TabContent';
 
 class AddTaskForm extends React.Component {
   static propTypes = {
@@ -13,20 +12,20 @@ class AddTaskForm extends React.Component {
   };
 
   titleRef = React.createRef();
-  // eslint-disable-next-line lines-between-class-members
+
   dateRef = React.createRef();
-  // eslint-disable-next-line lines-between-class-members
+
   timeRef = React.createRef();
-  // eslint-disable-next-line lines-between-class-members
+
   fileRef = React.createRef();
-  // eslint-disable-next-line lines-between-class-members
+
   commentRef = React.createRef();
-  // eslint-disable-next-line lines-between-class-members
+
   completedRef = React.createRef();
-  // eslint-disable-next-line lines-between-class-members
+
   importantRef = React.createRef();
 
-  handleSubmit = e => {
+  createTask = e => {
     e.preventDefault();
 
     const { addTask } = this.props;
@@ -53,7 +52,7 @@ class AddTaskForm extends React.Component {
     const toggleEditStatus = isEditing ? 'is-editing' : '';
 
     return (
-      <form ref={formRef} className="single-task__edit new-task" onSubmit={this.handleSubmit}>
+      <form ref={formRef} className="single-task__edit new-task" onSubmit={this.createTask}>
         <div className="edit-head">
           <div className="edit-head__checkbox">
             <input ref={this.completedRef} type="checkbox" name="completed" id="completed" />

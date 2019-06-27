@@ -4,79 +4,42 @@ import EditTaskHead from './EditTaskHead';
 import EditTaskBody from './EditTaskBody';
 
 class SingleTask extends React.Component {
-  static propTypes = {
-    addTask: PropTypes.func,
-    closeEditBody: PropTypes.func,
-    editIsOpen: PropTypes.bool,
-  };
-
-  formRef = React.createRef();
-
-  state = {
-    title: null,
-    date: null,
-    time: null,
-    file: null,
-    comment: null,
-    completed: false,
-    important: false,
-  };
+  static propTypes = {};
 
   handleInputChange = e => {
-    this.setState({
-      [e.currentTarget.name]: e.currentTarget.checked || e.currentTarget.value,
+    const { name, value, type, checked } = e.currentTarget;
+    const inputValue = type === 'checkbox' ? checked : value;
+    const { id, updateTask } = this.props;
+
+    updateTask(id, {
+      [name]: inputValue,
     });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
+  // handleCancel = () => {
+  //   const { closeEditBody } = this.props;
 
-    const { title, date, time, file, comment, completed, important } = this.state;
-    const { addTask, closeEditBody } = this.props;
-
-    const task = {
-      id: Date.now(),
-      title,
-      date,
-      time,
-      file,
-      comment,
-      completed,
-      important,
-    };
-
-    if (title) {
-      addTask(task);
-    }
-
-    e.currentTarget.reset();
-    closeEditBody();
-  };
-
-  handleCancel = () => {
-    const { closeEditBody } = this.props;
-
-    this.formRef.current.reset();
-    closeEditBody();
-  };
+  //   this.formRef.current.reset();
+  //   closeEditBody();
+  // };
 
   render() {
-    const { isNewTask, editIsOpen, data } = this.props;
+    const { id, data, formRef, isEditing, cancelTask } = this.props;
 
     return (
       <li className="single-task">
-        <form className="single-task__edit" ref={this.formRef} onSubmit={this.handleSubmit}>
+        <form ref={formRef} className="single-task__edit">
           <EditTaskHead
+            id={id}
             data={data}
-            onChange={this.handleInputChange}
-            isNewTask={isNewTask}
-            editIsOpen={editIsOpen}
+            handleInputChange={this.handleInputChange}
+            isEditing={isEditing}
           />
           <EditTaskBody
+            id={id}
             data={data}
-            onChange={this.handleInputChange}
-            handleCancel={this.handleCancel}
-            isNewTask={isNewTask}
+            handleInputChange={this.handleInputChange}
+            cancelTask={cancelTask}
           />
         </form>
       </li>
