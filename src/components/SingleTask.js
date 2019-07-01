@@ -4,42 +4,53 @@ import EditTaskHead from './EditTaskHead';
 import EditTaskBody from './EditTaskBody';
 
 class SingleTask extends React.Component {
-  static propTypes = {};
+  static propTypes = {
+    uid: PropTypes.number.isRequired,
+    data: PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      date: PropTypes.string,
+      time: PropTypes.string,
+      file: PropTypes.string,
+      comment: PropTypes.string,
+      important: PropTypes.bool,
+      completed: PropTypes.bool,
+      isEditMode: PropTypes.bool,
+    }).isRequired,
+    updateTask: PropTypes.func.isRequired,
+    saveTask: PropTypes.func.isRequired,
+    resetTask: PropTypes.func.isRequired,
+    openEditMode: PropTypes.func.isRequired,
+  };
 
   handleInputChange = e => {
     const { name, value, type, checked } = e.currentTarget;
     const inputValue = type === 'checkbox' ? checked : value;
-    const { id, updateTask } = this.props;
+    const { uid, updateTask } = this.props;
 
-    updateTask(id, {
+    updateTask(uid, {
       [name]: inputValue,
     });
   };
 
-  // handleCancel = () => {
-  //   const { closeEditBody } = this.props;
-
-  //   this.formRef.current.reset();
-  //   closeEditBody();
-  // };
-
   render() {
-    const { id, data, formRef, isEditing, cancelTask } = this.props;
+    const { uid, data, openEditMode, saveTask, resetTask } = this.props;
 
     return (
       <li className="single-task">
-        <form ref={formRef} className="single-task__edit">
+        <form className="single-task__edit">
           <EditTaskHead
-            id={id}
+            uid={uid}
             data={data}
             handleInputChange={this.handleInputChange}
-            isEditing={isEditing}
+            openEditMode={openEditMode}
           />
           <EditTaskBody
-            id={id}
+            uid={uid}
             data={data}
             handleInputChange={this.handleInputChange}
-            cancelTask={cancelTask}
+            saveTask={saveTask}
+            resetTask={resetTask}
           />
         </form>
       </li>

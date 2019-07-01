@@ -1,14 +1,28 @@
-/* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import PropTypes from 'prop-types';
 
 class EditTaskHead extends React.Component {
-  static propTypes = {};
+  static propTypes = {
+    uid: PropTypes.number.isRequired,
+    data: PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      date: PropTypes.string,
+      time: PropTypes.string,
+      file: PropTypes.string,
+      comment: PropTypes.string,
+      important: PropTypes.bool,
+      completed: PropTypes.bool,
+      isEditMode: PropTypes.bool,
+    }).isRequired,
+    handleInputChange: PropTypes.func.isRequired,
+    openEditMode: PropTypes.func.isRequired,
+  };
 
   render() {
-    const { handleInputChange, isEditing } = this.props;
-    const { title, completed, important } = this.props.data;
-    const toggleEditStatus = isEditing ? 'is-editing' : '';
+    const { uid, data, handleInputChange, openEditMode } = this.props;
+    const { title, isEditMode, completed, important } = data;
+    const toggleEditStatus = isEditMode ? 'is-editing' : '';
 
     return (
       <div className="edit-head">
@@ -16,13 +30,13 @@ class EditTaskHead extends React.Component {
           <input
             type="checkbox"
             name="completed"
-            id="completed"
+            id={`completed-${uid}`}
             checked={completed}
             onChange={handleInputChange}
           />
-          <label htmlFor="completed" />
+          <label htmlFor={`completed-${uid}`} />
         </div>
-        <div className="edit-head__content">
+        <div className="edit-head__content" onClick={() => openEditMode(uid)}>
           <input
             className="edit-head__input-title"
             type="text"
@@ -37,13 +51,13 @@ class EditTaskHead extends React.Component {
           <input
             type="checkbox"
             name="important"
-            id="important"
+            id={`important-${uid}`}
             checked={important}
             onChange={handleInputChange}
           />
-          <label htmlFor="important" />
+          <label htmlFor={`important-${uid}`} />
         </div>
-        <div className={`edit-head__edit ${toggleEditStatus}`}>
+        <div className={`edit-head__edit ${toggleEditStatus}`} onClick={() => openEditMode(uid)}>
           <i className="fas fa-pen edit-head__icon-edit" />
         </div>
       </div>

@@ -3,7 +3,7 @@ import AddTaskForm from './AddTaskForm';
 import SingleTask from './SingleTask';
 
 class TabContent extends React.Component {
-  formRef = React.createRef();
+  baseState = '';
 
   state = {
     tasks: [
@@ -16,6 +16,7 @@ class TabContent extends React.Component {
         comment: 'no comment',
         completed: false,
         important: true,
+        isEditMode: false,
       },
       {
         id: 2,
@@ -26,17 +27,14 @@ class TabContent extends React.Component {
         comment: 'Hi, i am flash',
         completed: true,
         important: false,
+        isEditMode: false,
       },
     ],
     newTaskIsOpen: false,
-    isEditing: false,
   };
 
   openNewTask = () => {
-    this.setState({
-      newTaskIsOpen: true,
-      isEditing: true,
-    });
+    this.setState({ newTaskIsOpen: true });
   };
 
   addTask = task => {
@@ -45,20 +43,65 @@ class TabContent extends React.Component {
       {
         id: Date.now(),
         ...task,
+        isEditMode: false,
       },
     ];
 
     this.setState({
       tasks,
       newTaskIsOpen: false,
-      isEditing: false,
     });
   };
 
-  updateTask = (id, updatedContent) => {
-    const { tasks } = this.state;
+  cancelAddTask = () => {
+    this.setState({ newTaskIsOpen: false });
+  };
+
+  openEditMode = uid => {
+    let isOpened;
+    const tasks = [...this.state.tasks];
     const updatedTask = tasks.map(task => {
-      if (task.id === id) {
+      if (task.id === uid) {
+        isOpened = task.isEditMode;
+
+        return {
+          ...task,
+          isEditMode: true,
+        };
+      }
+
+      return task;
+    });
+
+    this.setState({ tasks: updatedTask });
+
+    if (!isOpened) {
+      this.baseState = this.state;
+    }
+  };
+
+  saveTask = (e, uid) => {
+    e.preventDefault();
+
+    const tasks = [...this.state.tasks];
+    const updatedTask = tasks.map(task => {
+      if (task.id === uid) {
+        return {
+          ...task,
+          isEditMode: false,
+        };
+      }
+
+      return task;
+    });
+
+    this.setState({ tasks: updatedTask });
+  };
+
+  updateTask = (uid, updatedContent) => {
+    const tasks = [...this.state.tasks];
+    const updatedTask = tasks.map(task => {
+      if (task.id === uid) {
         return {
           ...task,
           ...updatedContent,
@@ -71,26 +114,17 @@ class TabContent extends React.Component {
     this.setState({ tasks: updatedTask });
   };
 
-  cancelTask = () => {
-    this.formRef.current.reset();
-    this.setState({
-      newTaskIsOpen: false,
-      isEditing: false,
-    });
+  resetTask = () => {
+    this.setState(this.baseState);
   };
 
   render() {
-    const { tasks, newTaskIsOpen, isEditing } = this.state;
+    const { tasks, newTaskIsOpen } = this.state;
 
     return (
       <div className="tab-content wrapper-s">
         {newTaskIsOpen ? (
-          <AddTaskForm
-            formRef={this.formRef}
-            isEditing={isEditing}
-            addTask={this.addTask}
-            cancelTask={this.cancelTask}
-          />
+          <AddTaskForm addTask={this.addTask} cancelAddTask={this.cancelAddTask} />
         ) : (
           <div className="add-task" onClick={this.openNewTask}>
             ＋ Add a task
@@ -101,12 +135,12 @@ class TabContent extends React.Component {
           {tasks.map(task => (
             <SingleTask
               key={task.id}
-              id={task.id}
+              uid={task.id}
               data={task}
-              formRef={this.formRef}
-              isEditing={isEditing}
+              openEditMode={this.openEditMode}
               updateTask={this.updateTask}
-              cancelTask={this.cancelTask}
+              saveTask={this.saveTask}
+              resetTask={this.resetTask}
             />
           ))}
         </ul>

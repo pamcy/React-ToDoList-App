@@ -2,11 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class EditTaskBody extends React.Component {
-  static propTypes = {};
+  static propTypes = {
+    uid: PropTypes.number.isRequired,
+    data: PropTypes.shape({
+      id: PropTypes.number,
+      title: PropTypes.string,
+      date: PropTypes.string,
+      time: PropTypes.string,
+      file: PropTypes.string,
+      comment: PropTypes.string,
+      important: PropTypes.bool,
+      completed: PropTypes.bool,
+      isEditMode: PropTypes.bool,
+    }).isRequired,
+    handleInputChange: PropTypes.func.isRequired,
+    saveTask: PropTypes.func.isRequired,
+    resetTask: PropTypes.func.isRequired,
+  };
 
   render() {
-    const { handleInputChange, cancelTask } = this.props;
-    const { date, time, file, comment } = this.props.data;
+    const { uid, data, handleInputChange, saveTask, resetTask } = this.props;
+    const { isEditMode, date, time, comment } = data;
+
+    if (!isEditMode) {
+      return null;
+    }
 
     return (
       <div className="edit-body">
@@ -16,34 +36,21 @@ class EditTaskBody extends React.Component {
               Deadline
             </label>
             <div className="edit-body__input-wrapper">
-              <input
-                ref={this.dateRef}
-                type="date"
-                name="date"
-                value={date}
-                onChange={handleInputChange}
-              />
-              <input
-                ref={this.timeRef}
-                type="time"
-                name="time"
-                value={time}
-                onChange={handleInputChange}
-              />
+              <input type="date" name="date" value={date} onChange={handleInputChange} />
+              <input type="time" name="time" value={time} onChange={handleInputChange} />
             </div>
           </div>
           <div className="edit-body__field">
             <label htmlFor="file" className="edit-body__label">
               File
             </label>
-            <input ref={this.fileRef} type="file" name="file" onChange={handleInputChange} />
+            <input type="file" name="file" onChange={handleInputChange} />
           </div>
           <div className="edit-body__field">
             <label htmlFor="comment" className="edit-body__label">
               Comment
             </label>
             <textarea
-              ref={this.commentRef}
               name="comment"
               rows="8"
               placeholder="Type your memo here..."
@@ -56,12 +63,16 @@ class EditTaskBody extends React.Component {
           <button
             type="button"
             className="edit-body__btn edit-body__btn--cancel"
-            onClick={() => cancelTask()}
+            onClick={() => resetTask()}
           >
             &#10005; Cancel
           </button>
-          <button type="submit" className="edit-body__btn edit-body__btn--add">
-            ＋ Add Task
+          <button
+            type="button"
+            className="edit-body__btn edit-body__btn--add"
+            onClick={e => saveTask(e, uid)}
+          >
+            ＋ Save
           </button>
         </div>
       </div>

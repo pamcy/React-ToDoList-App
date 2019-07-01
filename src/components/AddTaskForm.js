@@ -3,13 +3,11 @@ import PropTypes from 'prop-types';
 
 class AddTaskForm extends React.Component {
   static propTypes = {
-    formRef: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
-    ]),
     addTask: PropTypes.func.isRequired,
-    cancelTask: PropTypes.func.isRequired,
+    cancelAddTask: PropTypes.func.isRequired,
   };
+
+  formRef = React.createRef();
 
   titleRef = React.createRef();
 
@@ -47,12 +45,15 @@ class AddTaskForm extends React.Component {
     }
   };
 
-  render() {
-    const { formRef, cancelTask, isEditing } = this.props;
-    const toggleEditStatus = isEditing ? 'is-editing' : '';
+  clearInputValue = () => {
+    const { cancelAddTask } = this.props;
+    this.formRef.current.reset();
+    cancelAddTask();
+  };
 
+  render() {
     return (
-      <form ref={formRef} className="single-task__edit new-task" onSubmit={this.createTask}>
+      <form ref={this.formRef} className="single-task__edit new-task" onSubmit={this.createTask}>
         <div className="edit-head">
           <div className="edit-head__checkbox">
             <input ref={this.completedRef} type="checkbox" name="completed" id="completed" />
@@ -72,7 +73,7 @@ class AddTaskForm extends React.Component {
             <input ref={this.importantRef} type="checkbox" name="important" id="important" />
             <label htmlFor="important" />
           </div>
-          <div className={`edit-head__edit ${toggleEditStatus}`}>
+          <div className="edit-head__edit is-editing">
             <i className="fas fa-pen edit-head__icon-edit" />
           </div>
         </div>
@@ -109,7 +110,7 @@ class AddTaskForm extends React.Component {
             <button
               type="button"
               className="edit-body__btn edit-body__btn--cancel"
-              onClick={() => cancelTask()}
+              onClick={this.clearInputValue}
             >
               &#10005; Cancel
             </button>
