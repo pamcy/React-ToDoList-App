@@ -1,10 +1,7 @@
 .edit-body {
+  margin-top: -3px;
   border-radius: 0 0 5px 5px;
   background-color: $gray-lighter;
-
-  &.is-hidden {
-    display: none;
-  }
 }
 
 .edit-body__content {

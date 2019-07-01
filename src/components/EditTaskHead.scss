@@ -6,6 +6,10 @@
   padding: 0 rem(24);
   border-radius: 5px;
   background-color: $gray-lighter;
+
+  &.is-important {
+    background-color: $orange-light;
+  }
 }
 
 .edit-head__input-title {
@@ -13,6 +17,11 @@
 
   padding: 1.5rem 0;
   width: 100%;
+
+  &.is-completed {
+    text-decoration: line-through;
+    color: $gray;
+  }
 }
 
 .edit-head__checkbox,
@@ -71,8 +80,10 @@ input[type='checkbox'] {
 .edit-head__icon-edit {
   font-size: rem(24);
   color: $black;
+  cursor: pointer;
 
   .is-editing & {
     color: $blue;
+    cursor: default;
   }
 }

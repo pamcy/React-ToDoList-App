@@ -22,10 +22,12 @@ class EditTaskHead extends React.Component {
   render() {
     const { uid, data, handleInputChange, openEditMode } = this.props;
     const { title, isEditMode, completed, important } = data;
-    const toggleEditStatus = isEditMode ? 'is-editing' : '';
+    const editStatus = isEditMode ? 'is-editing' : '';
+    const importantStatus = important ? 'is-important' : '';
+    const completedStatus = completed ? 'is-completed' : '';
 
     return (
-      <div className="edit-head">
+      <div className={`edit-head ${importantStatus}`}>
         <div className="edit-head__checkbox">
           <input
             type="checkbox"
@@ -38,7 +40,7 @@ class EditTaskHead extends React.Component {
         </div>
         <div className="edit-head__content" onClick={() => openEditMode(uid)}>
           <input
-            className="edit-head__input-title"
+            className={`edit-head__input-title ${completedStatus}`}
             type="text"
             name="title"
             value={title}
@@ -57,7 +59,7 @@ class EditTaskHead extends React.Component {
           />
           <label htmlFor={`important-${uid}`} />
         </div>
-        <div className={`edit-head__edit ${toggleEditStatus}`} onClick={() => openEditMode(uid)}>
+        <div className={`edit-head__edit ${editStatus}`} onClick={() => openEditMode(uid)}>
           <i className="fas fa-pen edit-head__icon-edit" />
         </div>
       </div>

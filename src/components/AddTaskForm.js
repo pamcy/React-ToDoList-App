@@ -37,6 +37,11 @@ class AddTaskForm extends React.Component {
       important: this.importantRef.current.checked,
     };
 
+    // If the task marks completed, uncheck the star automatically.
+    if (task.completed) {
+      task.important = false;
+    }
+
     if (this.titleRef.current.value === '') {
       alert('Task name must be filled in!');
     } else {

@@ -26,10 +26,19 @@ class SingleTask extends React.Component {
   handleInputChange = e => {
     const { name, value, type, checked } = e.currentTarget;
     const inputValue = type === 'checkbox' ? checked : value;
-    const { uid, updateTask } = this.props;
+    const { uid, data, updateTask } = this.props;
+    let resetStar = {};
+
+    // If the task marks completed, uncheck the star automatically.
+    if ((name === 'completed' && checked) || data.completed) {
+      resetStar = {
+        important: false,
+      };
+    }
 
     updateTask(uid, {
       [name]: inputValue,
+      ...resetStar,
     });
   };
 
