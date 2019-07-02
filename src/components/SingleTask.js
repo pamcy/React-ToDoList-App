@@ -11,7 +11,6 @@ class SingleTask extends React.Component {
       title: PropTypes.string,
       date: PropTypes.string,
       time: PropTypes.string,
-      file: PropTypes.string,
       comment: PropTypes.string,
       important: PropTypes.bool,
       completed: PropTypes.bool,

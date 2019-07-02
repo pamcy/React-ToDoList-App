@@ -27,10 +27,6 @@
     content: "\f073";
   }
 
-  &[for=file]::before {
-    content: "\f15b";
-  }
-
   &[for=comment]::before {
     content: "\f4ad";
   }
@@ -62,7 +58,6 @@
   }
 
   .edit-body__input-wrapper,
-  input[name="file"],
   textarea[name="comment"] {
     margin-left: rem(25);
   }

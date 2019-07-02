@@ -15,8 +15,6 @@ class AddTaskForm extends React.Component {
 
   timeRef = React.createRef();
 
-  fileRef = React.createRef();
-
   commentRef = React.createRef();
 
   completedRef = React.createRef();
@@ -31,7 +29,6 @@ class AddTaskForm extends React.Component {
       title: this.titleRef.current.value,
       date: this.dateRef.current.value,
       time: this.timeRef.current.value,
-      file: this.fileRef.current.value,
       comment: this.commentRef.current.value,
       completed: this.completedRef.current.checked,
       important: this.importantRef.current.checked,
@@ -92,12 +89,6 @@ class AddTaskForm extends React.Component {
                 <input ref={this.dateRef} type="date" name="date" />
                 <input ref={this.timeRef} type="time" name="time" />
               </div>
-            </div>
-            <div className="edit-body__field">
-              <label htmlFor="file" className="edit-body__label">
-                File
-              </label>
-              <input ref={this.fileRef} type="file" name="file" />
             </div>
             <div className="edit-body__field">
               <label htmlFor="comment" className="edit-body__label">

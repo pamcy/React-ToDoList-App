@@ -9,7 +9,6 @@ class EditTaskBody extends React.Component {
       title: PropTypes.string,
       date: PropTypes.string,
       time: PropTypes.string,
-      file: PropTypes.string,
       comment: PropTypes.string,
       important: PropTypes.bool,
       completed: PropTypes.bool,
@@ -39,12 +38,6 @@ class EditTaskBody extends React.Component {
               <input type="date" name="date" value={date} onChange={handleInputChange} />
               <input type="time" name="time" value={time} onChange={handleInputChange} />
             </div>
-          </div>
-          <div className="edit-body__field">
-            <label htmlFor="file" className="edit-body__label">
-              File
-            </label>
-            <input type="file" name="file" onChange={handleInputChange} />
           </div>
           <div className="edit-body__field">
             <label htmlFor="comment" className="edit-body__label">
