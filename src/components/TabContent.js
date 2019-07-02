@@ -56,12 +56,12 @@ class TabContent extends React.Component {
   };
 
   openEditMode = uid => {
-    let isOpened;
     const tasks = [...this.state.tasks];
     const updatedTask = tasks.map(task => {
-      if (task.id === uid) {
-        isOpened = task.isEditMode;
+      task.isEditMode = false; // Close all opened task
+      this.baseState = this.state; // Save a copy of this.state
 
+      if (task.id === uid) {
         return {
           ...task,
           isEditMode: true,
@@ -72,10 +72,6 @@ class TabContent extends React.Component {
     });
 
     this.setState({ tasks: updatedTask });
-
-    if (!isOpened) {
-      this.baseState = this.state;
-    }
   };
 
   saveTask = (e, uid) => {
