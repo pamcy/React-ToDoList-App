@@ -1,35 +1,27 @@
 import React from 'react';
 import AddTaskForm from './AddTaskForm';
 import SingleTask from './SingleTask';
+import sampleTodos from '../sample-todos';
 
 class TabContent extends React.Component {
   baseState = '';
 
   state = {
-    tasks: [
-      {
-        id: 1,
-        title: 'Rogers',
-        date: '1960-04-30',
-        time: '23:30',
-        comment: 'no comment',
-        completed: false,
-        important: true,
-        isEditMode: false,
-      },
-      {
-        id: 2,
-        title: 'Barry',
-        date: '1953-11-12',
-        time: '09:05',
-        comment: 'Hi, i am flash',
-        completed: true,
-        important: false,
-        isEditMode: false,
-      },
-    ],
+    tasks: [...sampleTodos],
     newTaskIsOpen: false,
   };
+
+  componentDidMount() {
+    const localStorageValue = localStorage.getItem('todoItem');
+
+    if (localStorageValue) {
+      this.setState({ tasks: JSON.parse(localStorageValue) });
+    }
+  }
+
+  componentDidUpdate() {
+    localStorage.setItem('todoItem', JSON.stringify(this.state.tasks));
+  }
 
   openNewTask = () => {
     this.setState({ newTaskIsOpen: true });
