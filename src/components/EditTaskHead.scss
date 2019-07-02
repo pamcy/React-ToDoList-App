@@ -15,12 +15,16 @@
 .edit-head__input-title {
   @extend %heading--24;
 
-  padding: 1.5rem 0;
+  padding: rem(30) 0;
   width: 100%;
 
   &.is-completed {
     text-decoration: line-through;
     color: $gray;
+  }
+
+  &.has-infoBar {
+    padding: rem(15) 0;
   }
 }
 
@@ -30,7 +34,7 @@
   width: rem(28);
 }
 
-input[type='checkbox'] {
+input[type="checkbox"] {
   display: none;
 
   &+label::before {
@@ -44,7 +48,7 @@ input[type='checkbox'] {
 
 .edit-head__checkbox {
   input+label::before {
-    content: '\f00c';
+    content: "\f00c";
     font-weight: 900;
     color: $white;
     background-color: $white;
@@ -57,13 +61,13 @@ input[type='checkbox'] {
   }
 
   input:checked+label::after {
-    content: '';
+    content: "";
   }
 }
 
 .edit-head__priority {
   input+label::before {
-    content: '\f005';
+    content: "\f005";
     color: $black;
   }
 
@@ -73,7 +77,7 @@ input[type='checkbox'] {
   }
 
   input:checked+label::after {
-    content: '';
+    content: "";
   }
 }
 

@@ -1,0 +1,22 @@
+.single-item__infos {
+  margin-bottom: rem(13);
+
+  i {
+    @extend %text--16;
+
+    color: $gray-dark;
+  }
+}
+
+.single-item__info {
+  &:not(:last-of-type) {
+    margin-right: rem(10);
+  }
+}
+
+.single-item__txt {
+  @extend %text--14;
+
+  margin-left: rem(5);
+  color: $gray-dark;
+}

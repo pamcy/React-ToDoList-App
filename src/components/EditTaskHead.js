@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import SingleInfoBar from './SingleInfoBar';
 
 class EditTaskHead extends React.Component {
   static propTypes = {
@@ -21,10 +22,12 @@ class EditTaskHead extends React.Component {
 
   render() {
     const { uid, data, handleInputChange, openEditMode } = this.props;
-    const { title, isEditMode, completed, important } = data;
+    const { title, date, comment, isEditMode, completed, important } = data;
     const editStatus = isEditMode ? 'is-editing' : '';
     const importantStatus = important ? 'is-important' : '';
     const completedStatus = completed ? 'is-completed' : '';
+    const infoBarStatus = date.length > 0 || comment.length > 0;
+    const paddingStyle = infoBarStatus ? 'has-infoBar' : '';
 
     return (
       <div className={`edit-head ${importantStatus}`}>
@@ -40,7 +43,7 @@ class EditTaskHead extends React.Component {
         </div>
         <div className="edit-head__content" onClick={() => openEditMode(uid)}>
           <input
-            className={`edit-head__input-title ${completedStatus}`}
+            className={`edit-head__input-title ${completedStatus} ${paddingStyle}`}
             type="text"
             name="title"
             value={title}
@@ -48,6 +51,7 @@ class EditTaskHead extends React.Component {
             onChange={handleInputChange}
             autoFocus
           />
+          {infoBarStatus && <SingleInfoBar data={data} />}
         </div>
         <div className="edit-head__priority">
           <input
