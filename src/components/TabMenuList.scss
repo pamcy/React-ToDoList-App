@@ -27,4 +27,9 @@
     border-bottom-color: $darkBlue;
     color: $white;
   }
+
+  @include media('below-mobile') {
+    padding: rem(24) rem(10);
+    font-size: 4.5vw;
+  }
 }

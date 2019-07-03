@@ -48,7 +48,6 @@ class EditTaskHead extends React.Component {
             value={title}
             placeholder="Add a task"
             onChange={handleInputChange}
-            autoFocus
           />
           {infoBarStatus && <SingleInfoBar data={data} />}
         </div>

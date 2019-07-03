@@ -79,10 +79,18 @@
   border-bottom-left-radius: 5px;
   background-color: $white;
   color: $red;
+
+  &:hover {
+    background-color: $red-lighter;
+  }
 }
 
 .edit-body__btn--add {
   border-bottom-right-radius: 5px;
   background-color: $blue;
   color: $white;
+
+  &:hover {
+    background-color: $hoverBlue;
+  }
 }
