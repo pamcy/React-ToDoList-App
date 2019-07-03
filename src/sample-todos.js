@@ -39,6 +39,16 @@ const todos = [
     important: true,
     isEditMode: false,
   },
+  {
+    id: 5,
+    title: 'BBQ in wilderness',
+    date: '',
+    time: '15:00',
+    comment: 'Make new recipe: mixed leaf & orange salad',
+    completed: true,
+    important: false,
+    isEditMode: false,
+  },
 ];
 
 export default todos;
