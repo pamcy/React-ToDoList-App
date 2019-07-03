@@ -1,12 +1,14 @@
-# React ToDoList App
+# React ToDoList App [![Netlify Status](https://api.netlify.com/api/v1/badges/0d28692f-98f6-4f2a-803a-097fd55bcaa8/deploy-status)](https://app.netlify.com/sites/todolist-app-react/deploys)
 
-Recently I started learning React and develope this sample To-Do List App fully in React. This application is with three types, all todos, in progress and completed.
+Recently I started learning React and develope this sample To-Do List App fully in React.<br>
+This application is with three types, all todos, in progress and completed.
 
 ## Demo
 
-**Live URL:** []()
+**Live URL:** [https://todolist-app-react.netlify.com/](https://todolist-app-react.netlify.com/)
 
-![ToDoList App in React](https://res.cloudinary.com/pamcy/image/upload/v1562146414/coding/react-todolist.png)
+![ToDoList App in React](https://res.cloudinary.com/pamcy/image/upload/v1562149485/coding/react-todolist.png)
+_The To-Do list template designed and shared by [Hexschool(六角學院)](https://hexschool.github.io/THE_F2E_Design/todolist/)_
 
 ## What I learned from this project
 
