@@ -14,7 +14,7 @@ _The To-Do list template designed and shared by [Hexschool(六角學院)](https:
 
 - [x] Handle form in React with uncontrolled & controlled components
 - [x] Multiple checkbox / toggle state
-- [x] Render along with multiple <Route>s that match the URL
+- [x] Render along with multiple Routes that match the URL
 - [x] Render each list according to their task status
 - [x] Most important task is at the top of the page
 - [x] Store todo items in localStorage
