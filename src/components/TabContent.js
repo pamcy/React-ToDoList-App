@@ -106,6 +106,21 @@ class TabContent extends React.Component {
 
   render() {
     const { tasks, newTaskIsOpen } = this.state;
+    const currentPath = this.props.match.path;
+    const results = [
+      {
+        path: '/',
+        content: tasks,
+      },
+      {
+        path: '/progress',
+        content: tasks.filter(task => !task.completed),
+      },
+      {
+        path: '/completed',
+        content: tasks.filter(task => task.completed),
+      },
+    ];
 
     return (
       <div className="tab-content wrapper-s">
@@ -118,17 +133,21 @@ class TabContent extends React.Component {
         )}
 
         <ul className="tasks-wrapper">
-          {tasks.map(task => (
-            <SingleTask
-              key={task.id}
-              uid={task.id}
-              data={task}
-              openEditMode={this.openEditMode}
-              updateTask={this.updateTask}
-              saveTask={this.saveTask}
-              resetTask={this.resetTask}
-            />
-          ))}
+          {results.map(
+            result =>
+              currentPath === result.path &&
+              result.content.map(task => (
+                <SingleTask
+                  key={task.id}
+                  uid={task.id}
+                  data={task}
+                  openEditMode={this.openEditMode}
+                  updateTask={this.updateTask}
+                  saveTask={this.saveTask}
+                  resetTask={this.resetTask}
+                />
+              ))
+          )}
         </ul>
       </div>
     );

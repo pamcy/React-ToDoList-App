@@ -1,17 +1,23 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 
 const TabMenuList = () => (
   <div className="tab-menu">
     <ul className="tab-menu__list wrapper-s">
-      <li className="tab-menu__item is-active">
-        <Link to="./">My Tasks</Link>
+      <li className="tab-menu__item">
+        <NavLink exact to="/" className="tab-menu__link" activeClassName="is-active">
+          My Tasks
+        </NavLink>
       </li>
       <li className="tab-menu__item">
-        <Link to="/progress">In Progress</Link>
+        <NavLink to="/progress" className="tab-menu__link" activeClassName="is-active">
+          In Progress
+        </NavLink>
       </li>
       <li className="tab-menu__item">
-        <Link to="/complete">Completed</Link>
+        <NavLink to="/completed" className="tab-menu__link" activeClassName="is-active">
+          Completed
+        </NavLink>
       </li>
     </ul>
   </div>
