@@ -136,17 +136,19 @@ class TabContent extends React.Component {
           {results.map(
             result =>
               currentPath === result.path &&
-              result.content.map(task => (
-                <SingleTask
-                  key={task.id}
-                  uid={task.id}
-                  data={task}
-                  openEditMode={this.openEditMode}
-                  updateTask={this.updateTask}
-                  saveTask={this.saveTask}
-                  resetTask={this.resetTask}
-                />
-              ))
+              result.content
+                .sort((a, b) => b.important - a.important)
+                .map(task => (
+                  <SingleTask
+                    key={task.id}
+                    uid={task.id}
+                    data={task}
+                    openEditMode={this.openEditMode}
+                    updateTask={this.updateTask}
+                    saveTask={this.saveTask}
+                    resetTask={this.resetTask}
+                  />
+                ))
           )}
         </ul>
       </div>
