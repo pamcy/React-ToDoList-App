@@ -1,9 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import AddTaskForm from './AddTaskForm';
 import SingleTask from './SingleTask';
 import sampleTodos from '../sample-todos';
 
 class TabContent extends React.Component {
+  static propTypes = {
+    match: PropTypes.shape({
+      path: PropTypes.string,
+    }).isRequired,
+  };
+
   baseState = '';
 
   state = {
