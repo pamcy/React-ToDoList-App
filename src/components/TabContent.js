@@ -19,15 +19,21 @@ class TabContent extends React.Component {
   };
 
   componentDidMount() {
-    const localStorageValue = localStorage.getItem('todoItem');
+    const stateTasksValue = localStorage.getItem('todoItem');
+    const baseStateValue = localStorage.getItem('baseTodos');
 
-    if (localStorageValue) {
-      this.setState({ tasks: JSON.parse(localStorageValue) });
+    if (stateTasksValue) {
+      this.setState({ tasks: JSON.parse(stateTasksValue) });
+    }
+
+    if (baseStateValue) {
+      this.baseState = JSON.parse(baseStateValue);
     }
   }
 
   componentDidUpdate() {
     localStorage.setItem('todoItem', JSON.stringify(this.state.tasks));
+    localStorage.setItem('baseTodos', JSON.stringify(this.baseState));
   }
 
   openNewTask = () => {
