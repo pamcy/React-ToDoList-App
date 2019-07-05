@@ -50,10 +50,8 @@ class TabContent extends React.Component {
       },
     ];
 
-    this.setState({
-      tasks,
-      newTaskIsOpen: false,
-    });
+    this.setState({ tasks });
+    this.cancelAddTask();
   };
 
   cancelAddTask = () => {
