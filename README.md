@@ -7,7 +7,7 @@ This application is with three task types and routes, all todos, in progress and
 
 **Live URL:** [https://todolist-app-react.netlify.com/](https://todolist-app-react.netlify.com/)
 
-![ToDoList App in React](https://res.cloudinary.com/pamcy/image/upload/v1562149485/coding/react-todolist.png)
+![ToDoList App in React](https://res.cloudinary.com/pamcy/image/upload/v1563524071/coding/react-todolist.png)
 _The To-Do list template designed and shared by [Hexschool(六角學院)](https://hexschool.github.io/THE_F2E_Design/todolist/)_
 
 ## What I learned from this project
