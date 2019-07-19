@@ -18,6 +18,7 @@ _The To-Do list template designed and shared by [Hexschool(六角學院)](https:
 - [x] Render each list based on their task status
 - [x] Most important task is at the top of the page
 - [x] Store todo items in localStorage
+- [x] Drag and drop to change order of task items
 
 ## Installation
 

@@ -1,6 +1,6 @@
 .edit-head {
   display: grid;
-  grid-template-columns: auto 1fr auto auto;
+  grid-template-columns: auto auto 1fr auto auto;
   grid-column-gap: rem(20);
   align-items: center;
   padding: 0 rem(24);
@@ -9,6 +9,16 @@
 
   &.is-important {
     background-color: $orange-light;
+  }
+
+  &.drag-is-hidden {
+    grid-template-columns: auto 1fr auto auto;
+  }
+}
+
+.edit-head__drag {
+  .drag-is-hidden & {
+    display: none;
   }
 }
 

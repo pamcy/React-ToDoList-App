@@ -6,6 +6,7 @@ import EditTaskBody from './EditTaskBody';
 class SingleTask extends React.Component {
   static propTypes = {
     uid: PropTypes.number.isRequired,
+    index: PropTypes.number.isRequired,
     data: PropTypes.shape({
       id: PropTypes.number,
       title: PropTypes.string,
@@ -20,6 +21,7 @@ class SingleTask extends React.Component {
     saveTask: PropTypes.func.isRequired,
     resetTask: PropTypes.func.isRequired,
     openEditMode: PropTypes.func.isRequired,
+    currentPath: PropTypes.string.isRequired,
   };
 
   handleInputChange = e => {
@@ -42,16 +44,18 @@ class SingleTask extends React.Component {
   };
 
   render() {
-    const { uid, data, openEditMode, saveTask, resetTask } = this.props;
+    const { uid, index, data, openEditMode, saveTask, resetTask, currentPath } = this.props;
 
     return (
       <li className="single-task">
         <form className="single-task__edit">
           <EditTaskHead
             uid={uid}
+            index={index}
             data={data}
             handleInputChange={this.handleInputChange}
             openEditMode={openEditMode}
+            currentPath={currentPath}
           />
           <EditTaskBody
             uid={uid}

@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+
 import AddTaskForm from './AddTaskForm';
 import SingleTask from './SingleTask';
 import sampleTodos from '../sample-todos';
@@ -115,6 +117,27 @@ class TabContent extends React.Component {
     this.setState(this.baseState);
   };
 
+  onDragEnd = result => {
+    const { source, destination } = result;
+    const { tasks } = this.state;
+
+    if (!destination) {
+      return;
+    }
+
+    if (source.index === destination.index) {
+      return;
+    }
+
+    const newTasks = [...tasks];
+    const removeData = newTasks.splice(source.index, 1);
+    newTasks.splice(destination.index, 0, removeData[0]);
+
+    this.setState({
+      tasks: newTasks,
+    });
+  };
+
   render() {
     const { tasks, newTaskIsOpen } = this.state;
     const currentPath = this.props.match.path;
@@ -142,26 +165,34 @@ class TabContent extends React.Component {
             ＋ Add a task
           </div>
         )}
-
-        <ul className="tasks-wrapper">
-          {results.map(
-            result =>
-              currentPath === result.path &&
-              result.content
-                .sort((a, b) => b.important - a.important)
-                .map(task => (
-                  <SingleTask
-                    key={task.id}
-                    uid={task.id}
-                    data={task}
-                    openEditMode={this.openEditMode}
-                    updateTask={this.updateTask}
-                    saveTask={this.saveTask}
-                    resetTask={this.resetTask}
-                  />
-                ))
-          )}
-        </ul>
+        <DragDropContext onDragEnd={this.onDragEnd}>
+          <Droppable droppableId={currentPath}>
+            {provided => (
+              <ul className="tasks-wrapper" ref={provided.innerRef} {...provided.droppableProps}>
+                {results.map(
+                  result =>
+                    currentPath === result.path &&
+                    result.content
+                      .sort((a, b) => b.important - a.important)
+                      .map((task, index) => (
+                        <SingleTask
+                          key={task.id}
+                          uid={task.id}
+                          index={index}
+                          data={task}
+                          openEditMode={this.openEditMode}
+                          updateTask={this.updateTask}
+                          saveTask={this.saveTask}
+                          resetTask={this.resetTask}
+                          currentPath={currentPath}
+                        />
+                      ))
+                )}
+                {provided.placeholder}
+              </ul>
+            )}
+          </Droppable>
+        </DragDropContext>
       </div>
     );
   }
