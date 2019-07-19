@@ -16,51 +16,67 @@ const EditTaskHead = props => {
 
   return (
     <Draggable draggableId={uid} index={index}>
-      {provided => (
-        <div
-          className={`edit-head ${importantStatus} ${dragStatus}`}
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-        >
-          <div className="edit-head__drag" {...provided.dragHandleProps}>
-            <i className="fas fa-bars" />
+      {(provided, snapshot) => {
+        const dragStyle = {
+          boxShadow: snapshot.isDragging
+            ? '2px 2px 5px 1px rgba(0, 0, 0, 0.1), -2px -2px 5px 1px rgba(0, 0, 0, 0.1)'
+            : '',
+          ...provided.draggableProps.style,
+        };
+
+        return (
+          <div
+            className={`edit-head ${importantStatus} ${dragStatus}`}
+            {...provided.draggableProps}
+            ref={provided.innerRef}
+            style={dragStyle}
+          >
+            <div className="edit-head__drag" {...provided.dragHandleProps}>
+              <i className="fas fa-bars" />
+            </div>
+            <div className="edit-head__checkbox">
+              <input
+                type="checkbox"
+                name="completed"
+                id={`completed-${uid}`}
+                checked={completed}
+                onChange={handleInputChange}
+              />
+              <label htmlFor={`completed-${uid}`} />
+            </div>
+            <div
+              className="edit-head__content"
+              onClick={() => openEditMode(uid)}
+            >
+              <input
+                className={`edit-head__input-title ${completedStatus} ${paddingStyle}`}
+                type="text"
+                name="title"
+                value={title}
+                placeholder="Add a task"
+                onChange={handleInputChange}
+              />
+              {infoBarStatus && <SingleInfoBar data={data} />}
+            </div>
+            <div className="edit-head__priority">
+              <input
+                type="checkbox"
+                name="important"
+                id={`important-${uid}`}
+                checked={important}
+                onChange={handleInputChange}
+              />
+              <label htmlFor={`important-${uid}`} />
+            </div>
+            <div
+              className={`edit-head__edit ${editStatus}`}
+              onClick={() => openEditMode(uid)}
+            >
+              <i className="fas fa-pen edit-head__icon-edit" />
+            </div>
           </div>
-          <div className="edit-head__checkbox">
-            <input
-              type="checkbox"
-              name="completed"
-              id={`completed-${uid}`}
-              checked={completed}
-              onChange={handleInputChange}
-            />
-            <label htmlFor={`completed-${uid}`} />
-          </div>
-          <div className="edit-head__content" onClick={() => openEditMode(uid)}>
-            <input
-              className={`edit-head__input-title ${completedStatus} ${paddingStyle}`}
-              type="text"
-              name="title"
-              value={title}
-              placeholder="Add a task"
-              onChange={handleInputChange}
-            />
-            {infoBarStatus && <SingleInfoBar data={data} />}
-          </div>
-          <div className="edit-head__priority">
-            <input
-              type="checkbox"
-              name="important"
-              id={`important-${uid}`}
-              checked={important}
-              onChange={handleInputChange}
-            />
-            <label htmlFor={`important-${uid}`} />
-          </div>
-          <div className={`edit-head__edit ${editStatus}`} onClick={() => openEditMode(uid)}>
-            <i className="fas fa-pen edit-head__icon-edit" />
-          </div>
-        </div>
-      )}
+        );
+      }}
     </Draggable>
   );
 };
